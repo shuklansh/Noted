@@ -141,44 +141,56 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
-        title: Text("Noted.", style: TextStyle(color: Colors.black)),
-        backgroundColor: Colors.purpleAccent,
+        title: Text("Noted.", style: TextStyle(color: Colors.purpleAccent,letterSpacing: 2,fontSize: 40,fontWeight: FontWeight.w200)),
+        backgroundColor: Colors.transparent,
       ),
-      backgroundColor: Color.fromRGBO(1, 1, 1, 1),
+      backgroundColor: Color.fromRGBO(30, 30, 30, 1.0),
       body: ListView.builder(
           itemCount: listOfItemsAsMapInList.length,
           itemBuilder: (context, index) {
             final itemAsMapInList = listOfItemsAsMapInList[index];
             return Card(
-              elevation: 5,
+              elevation: 15,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
               color: Colors.purple,
               margin: EdgeInsets.all(12),
-              child: ListTile(
-                title: Text(
-                  itemAsMapInList['heading'],
-                  style: TextStyle(color: Colors.white),
-                ),
-                subtitle: Text(itemAsMapInList['content'].toString(),
-                    style: TextStyle(color: Colors.amber)),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                        onPressed: () =>
-                            showBottomModal(context, itemAsMapInList['key']),
-                        icon: Icon(Icons.edit)),
-                    IconButton(
-                        onPressed: () => DeleteContent(itemAsMapInList['key']),
-                        icon: Icon(Icons.delete)),
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      itemAsMapInList['heading'],
+                      style: TextStyle(color: Colors.white,fontSize: 24),
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 8,bottom: 12),
+                    child: Text(itemAsMapInList['content'].toString(),
+                        maxLines: 1,
+                        style: TextStyle(color: Colors.amber,overflow: TextOverflow.ellipsis)),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                          onPressed: () =>
+                              showBottomModal(context, itemAsMapInList['key']),
+                          icon: Icon(Icons.edit)),
+                      IconButton(
+                          onPressed: () => DeleteContent(itemAsMapInList['key']),
+                          icon: Icon(Icons.delete)),
+                    ],
+                  ),
                 ),
               ),
             );
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showBottomModal(context, null),
-        child: Icon(Icons.add_outlined, color: Colors.black),
+        child: Icon(Icons.edit, color: Colors.black),
         backgroundColor: Colors.purple,
       ),
     );
