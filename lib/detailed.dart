@@ -26,7 +26,7 @@ class _DetailedScreenState extends State<DetailedScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text(headingString),
+          title: Text(headingString,style: TextStyle(fontSize: 24,letterSpacing: 1,fontWeight: FontWeight.w300),),
           leading: IconButton(
             icon: Icon(Icons.navigate_before),
             onPressed: ()=>
@@ -49,12 +49,12 @@ class _DetailedScreenState extends State<DetailedScreen> {
                   height: MediaQuery.of(context).size.height*0.78,
                     decoration: BoxDecoration(
                       color: Colors.purple,
-                      borderRadius: BorderRadius.circular(30)
+                      borderRadius: BorderRadius.circular(16)
                     ),
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
-                        child: Text(contentString,style: TextStyle(fontSize: 24,color: Colors.white,fontWeight: FontWeight.w500,letterSpacing: 1.2)),
+                        child: Text(contentString,style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.w500,letterSpacing: 1.2)),
                       ),
                     ))
               ],

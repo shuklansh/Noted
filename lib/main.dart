@@ -205,7 +205,14 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.transparent,
       ),
       backgroundColor: Color.fromRGBO(30, 30, 30, 1.0),
-      body: ListView.builder(
+      body:
+      GridView.builder(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+
+              maxCrossAxisExtent: 320,
+              //childAspectRatio: 3 / 2,
+              crossAxisSpacing: 2,
+              mainAxisSpacing: 2),
           itemCount: listOfItemsAsMapInList.length,
           itemBuilder: (context, index) {
             final itemAsMapInList = listOfItemsAsMapInList[index];
@@ -218,41 +225,117 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.purple,
                 margin: EdgeInsets.all(12),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: ListTile(
-                    title: Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Text(
-                        itemAsMapInList['heading'],
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      ),
-                    ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 12),
-                      child: Text(itemAsMapInList['content'].toString(),
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: Colors.amber,
-                              overflow: TextOverflow.ellipsis)),
-                    ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
+                    // title: Padding(
+                    //   padding: const EdgeInsets.only(top: 8),
+                    //   child: Text(
+                    //     itemAsMapInList['heading'],
+                    //     style: TextStyle(color: Colors.white, fontSize: 12),
+                    //   ),
+                    // ),
+                    // subtitle: Text(itemAsMapInList['content'].toString(),
+                    //     maxLines: 1,
+                    //     style: TextStyle(
+                    //         color: Colors.amber,
+                    //         overflow: TextOverflow.ellipsis)),
+
+                    subtitle: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(
-                            onPressed: () =>
-                                showBottomModal(context, itemAsMapInList['key']),
-                            icon: Icon(Icons.edit)),
-                        IconButton(
-                            onPressed: () =>
-                                DeleteContent(itemAsMapInList['key']),
-                            icon: Icon(Icons.delete)),
+                        Expanded(
+                          child: Container(
+                              child: Text(itemAsMapInList['heading'],style: TextStyle(color: Colors.white,fontSize: 24,overflow: TextOverflow.ellipsis),maxLines: 2,)),
+                        ),
+                        Container(
+                          child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                      onPressed: () =>
+                                          showBottomModal(context, itemAsMapInList['key']),
+                                      icon: Icon(Icons.edit)),
+                                  SizedBox(height: 12,),
+                                  IconButton(
+                                      onPressed: () =>
+                                          DeleteContent(itemAsMapInList['key']),
+                                      icon: Icon(Icons.delete)),
+                                ],
+
+
+                          // trailing: Row(
+                          //   mainAxisSize: MainAxisSize.min,
+                          //   children: [
+                          //     IconButton(
+                          //         onPressed: () =>
+                          //             showBottomModal(context, itemAsMapInList['key']),
+                          //         icon: Icon(Icons.edit)),
+                          //     IconButton(
+                          //         onPressed: () =>
+                          //             DeleteContent(itemAsMapInList['key']),
+                          //         icon: Icon(Icons.delete)),
+                          //   ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
-              ),
+              )
             );
           }),
+
+
+
+      // ListView.builder(
+      //     itemCount: listOfItemsAsMapInList.length,
+      //     itemBuilder: (context, index) {
+      //       final itemAsMapInList = listOfItemsAsMapInList[index];
+      //       return InkWell(
+      //         onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailedScreen(itemAsMapInList['heading'],itemAsMapInList['content']))),
+      //         child: Card(
+      //           elevation: 15,
+      //           shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(50)),
+      //           color: Colors.purple,
+      //           margin: EdgeInsets.all(12),
+      //           child: Padding(
+      //             padding: const EdgeInsets.symmetric(horizontal: 16),
+      //             child: ListTile(
+      //               title: Padding(
+      //                 padding: const EdgeInsets.only(top: 8),
+      //                 child: Text(
+      //                   itemAsMapInList['heading'],
+      //                   style: TextStyle(color: Colors.white, fontSize: 24),
+      //                 ),
+      //               ),
+      //               subtitle: Padding(
+      //                 padding: const EdgeInsets.only(top: 8, bottom: 12),
+      //                 child: Text(itemAsMapInList['content'].toString(),
+      //                     maxLines: 1,
+      //                     style: TextStyle(
+      //                         color: Colors.amber,
+      //                         overflow: TextOverflow.ellipsis)),
+      //               ),
+      //               trailing: Row(
+      //                 mainAxisSize: MainAxisSize.min,
+      //                 children: [
+      //                   IconButton(
+      //                       onPressed: () =>
+      //                           showBottomModal(context, itemAsMapInList['key']),
+      //                       icon: Icon(Icons.edit)),
+      //                   IconButton(
+      //                       onPressed: () =>
+      //                           DeleteContent(itemAsMapInList['key']),
+      //                       icon: Icon(Icons.delete)),
+      //                 ],
+      //               ),
+      //             ),
+      //           ),
+      //         ),
+      //       );
+      //     }),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () => showBottomModal(context, null),
         child: Icon(Icons.edit, color: Colors.black),
