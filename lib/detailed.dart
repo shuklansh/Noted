@@ -46,7 +46,7 @@ class _DetailedScreenState extends State<DetailedScreen> {
                 SizedBox(height: 30),
                 Container(
                   width: double.infinity,
-                    height: 510,
+                  height: MediaQuery.of(context).size.height*0.78,
                     decoration: BoxDecoration(
                       color: Colors.purple,
                       borderRadius: BorderRadius.circular(30)
